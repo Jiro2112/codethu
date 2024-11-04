@@ -1,4 +1,4 @@
-#Toan tu tai boiham DAte
+#Toan tu tai boiham TIme
 #include <bits/stdc++.h>
 using namespace std;
 class Time
