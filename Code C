@@ -1,0 +1,109 @@
+#Toan tu tai boiham DAte
+#include <bits/stdc++.h>
+using namespace std;
+class Time
+{
+private:
+    int hour, minute, second;
+
+public:
+    Time(int a = 0, int b = 0, int c = 0);
+    void Nhap();
+    void Xuat();
+    Time operator+=(int k);  // tang k giay
+    int operator==(Time ob); // sosanh =nhau
+    int operator!=(Time ob); // sosanh !=nhau
+    Time ChuanHoa();
+    int operator-(Time b); // tinh khoang cach giua 2 thoi gian
+    int operator<(Time b); // so sanh < thoi gian
+};
+Time::Time(int a, int b, int c)
+{
+    hour = a;
+    minute = b;
+    second = c;
+}
+void Time::Nhap()
+{
+    cout << "Nhap gio: ";
+    cin >> hour;
+    cout << "Nhap phut: ";
+    cin >> minute;
+    cout << "Nhap giay: ";
+    cin >> second;
+}
+void Time::Xuat()
+{
+    cout << hour << ":" << minute << ":" << second << endl;
+}
+int Time::operator==(Time ob)
+{
+    if (hour == ob.hour && minute == ob.minute && second == ob.second)
+        return 1;
+    else
+        return 0;
+}
+int Time::operator!=(Time ob)
+{
+    if (hour != ob.hour || minute != ob.minute || second != ob.second)
+        return 1;
+    else
+        return 0;
+}
+Time Time::operator+=(int k)
+{
+    second += k;
+    return *this;
+}
+Time Time::ChuanHoa()
+{
+    if (second >= 60)
+    {
+        minute += second / 60;
+        second %= 60;
+    }
+    if (minute >= 60)
+    {
+        hour += minute / 60;
+        minute %= 60;
+    }
+    if (hour >= 24)
+    {
+        hour %= 24;
+    }
+    return *this;
+}
+int Time::operator-(Time b)
+{
+    return fabs(hour * 3600 + minute * 60 + second) - (b.hour * 3600 + b.minute * 60 + b.second);
+}
+int Time::operator <(Time b)
+{
+    int k;
+    k = hour * 3600 + minute * 60 + second;
+    if (k < 0)
+        return 1;
+    else
+        return 0;
+}
+int main()
+{
+    Time t1(5, 20, 30), t2(6, 20, 50);
+    t1.ChuanHoa();
+    t2.ChuanHoa();
+    t1.Xuat();
+    t2.Xuat();
+    if (t1 == t2)
+        cout << "T1 = T2" << endl;
+    else
+        cout << "T1 != T2" << endl;
+    cout << "T1-T2=" << t1 - t2 << endl;
+    int k = 10;
+    t1 += k;
+    t1.Xuat();
+    if (t1 < k)
+        cout << "T1 < k" << endl;
+    else
+        cout << "T1 >= k" << endl;
+    return 0;
+}
